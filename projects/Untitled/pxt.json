@@ -1,0 +1,13 @@
+{
+    "name": "Untitled",
+    "dependencies": {
+        "core": "*",
+        "test": "file:../microbit/pxt-test"
+    },
+    "description": "",
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md"
+    ]
+}

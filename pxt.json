@@ -1,0 +1,18 @@
+{
+    "name": "Andee",
+    "version": "0.8.1",
+    "description": "PXT package to enable the use of the Annikken Andee app on the BBC:MicroBit",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "bluetooth": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": false
+}
