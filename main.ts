@@ -10,7 +10,7 @@ let ble_reply: string;
 /**
  * Custom blocks
  */
-//% weight=100 color=#16aeac icon="\u0041"
+//% weight=50 color=#16aeac icon="\u0041"
 namespace Andee {
     export class Widget {
 
