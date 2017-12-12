@@ -357,11 +357,11 @@ namespace Andee {
     }
     /**
      * Raises an Andee event in the event bus using PXT Control functions
-     * @param id ID of the Widget, eg: 0
+     * @param id ID of the Widget, eg: WidgetId.Widget_1
      */
-    //% weight=20 blockGap=8 blockId="Andee_event" block="Andee Event|Widget ID%id"
+    //% weight=20 blockGap=8 blockId="Andee_event" block="Andee Event|%id"
     //% blockExternalInputs=1
-    export function AndeeEvent(id: number, action: Action): void {
+    export function AndeeEvent(id: WidgetId, action: Action): void {
         control.onEvent(id + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE, action);
     }
 
