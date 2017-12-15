@@ -112,13 +112,13 @@ namespace Andee {
         }
         /**
          * Each widget should have a colour
-         * @param colour Set Widget Colour, eg: AndeeColour.Red
+         * @param colour Set Widget Colour, eg: WidgetColour.Red
          */
         //% weight=55
         //% blockId=set_widget_colour
         //% block="Set Colour of %widget| to %colour"
         //% advanced=true
-        public setColour(colour: AndeeColour): void {
+        public setColour(colour: WidgetColour): void {
             this.widgetColour = colour;
         }
         /**
@@ -240,7 +240,7 @@ namespace Andee {
 
             if (this.widgetUpdate == loop || this.widgetUpdate == (0)) {
                 switch (this.widgetType) {
-                    case AndeeType.Databox:
+                    case WidgetType.Databox:
                         bleMsg = String.fromCharCode(UISTART) + DATA_OUT + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -250,7 +250,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetUnit +
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
-                    case AndeeType.Databox_Circle:
+                    case WidgetType.Databox_Circle:
                         bleMsg = String.fromCharCode(UISTART) + DATA_OUT_CIRCLE + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -260,7 +260,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetUnit +
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
-                    case AndeeType.Databox_Header:
+                    case WidgetType.Databox_Header:
                         bleMsg = String.fromCharCode(UISTART) + DATA_OUT_HEADER + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -269,7 +269,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
 
-                    case AndeeType.Button:
+                    case WidgetType.Button:
                         bleMsg = String.fromCharCode(UISTART) + BUTTON_IN + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -277,7 +277,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
-                    case AndeeType.Button_Circle:
+                    case WidgetType.Button_Circle:
                         bleMsg = String.fromCharCode(UISTART) + CIRCLE_BUTTON + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -285,7 +285,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
-                    case AndeeType.Keyboard_In:
+                    case WidgetType.Keyboard_In:
                         bleMsg = String.fromCharCode(UISTART) + KEYBOARD_IN + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -294,7 +294,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
-                    case AndeeTypeInput.Slider:
+                    case WidgetTypeInput.Slider:
                         bleMsg = String.fromCharCode(UISTART) + SLIDER_IN + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -307,7 +307,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetSliderSteps + 32) +
                             String.fromCharCode(SEP) + "0" + String.fromCharCode(UIEND);
                         break;
-                    case AndeeTypeInput.Analog_Dial:
+                    case WidgetTypeInput.Analog_Dial:
                         bleMsg = String.fromCharCode(UISTART) + ANALOG_DIAL_OUT + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -368,22 +368,22 @@ namespace Andee {
     /**
      * Create Widget
      * @param id ID of Widget, eg: WidgetId.Widget_1
-     * @param widgetType Type of Widget, eg: AndeeType.Databox
+     * @param widgetType Type of Widget, eg: WidgetType.Databox
      * @param position Position of Widget, eg: WidgetPosition.Row0_Column0
      * @param length Length of Widget, eg: WidgetLength.Half
-     * @param colour Colour of Widget, eg: AndeeColour.Red
+     * @param colour Colour of Widget, eg: WidgetColour.Red
      * @param title Title of Widget, eg: "Title"
      * @param data Widget Data Display, eg: "Data"
      * @param unit Widget Units Display, eg: "Units"
      */
     //% weight=90
     //% blockId=create_widget icon="\u0041
-    //% block="Create Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%AndeeColour|Widget Title%title|Widget Data%data|Widget Units%unit"
+    //% block="Create Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Data%data|Widget Units%unit"
     //% widgetType.fieldEditor="gridpicker" widgetType.fieldOptions.columns=3
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
-    //% AndeeColour.fieldEditor="gridpicker" AndeeColour.fieldOptions.columns=2
-    export function createWidget(id: WidgetId, widgetType: AndeeType, position: WidgetPosition, length: WidgetLength,
-        colour: AndeeColour, title: string, data: string, unit: string): Widget {
+    //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
+    export function createWidget(id: WidgetId, widgetType: WidgetType, position: WidgetPosition, length: WidgetLength,
+        colour: WidgetColour, title: string, data: string, unit: string): Widget {
         let widget = new Widget();
         let imd: number;
 
@@ -423,10 +423,10 @@ namespace Andee {
     /**
      * Create Slider/Analog Circle Widget
      * @param id ID of Widget, eg: WidgetId.Widget_1
-     * @param widgetType Type of Widget, eg: AndeeTypeInput.Slider
+     * @param widgetType Type of Widget, eg: WidgetTypeInput.Slider
      * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
      * @param length Length of Widget, eg: WidgetLength.Full
-     * @param colour Colour of Widget, eg: AndeeColour.Red
+     * @param colour Colour of Widget, eg: WidgetColour.Red
      * @param title Title of Widget, eg: "Title"     
      * @param unit Widget Units Display,eg: "Units"
      * @param currentValue Widget Current Value for Display, eg: "0"
@@ -436,11 +436,11 @@ namespace Andee {
      */
     //% weight=88
     //% blockId=create_slider_widget icon="\u0041
-    //% block="Create Slider/|AnalogCircle Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%AndeeColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
+    //% block="Create Slider/|AnalogCircle Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
-    //% AndeeColour.fieldEditor="gridpicker" AndeeColour.fieldOptions.columns=2
-    export function createSliderWidget(id: WidgetId, widgetType: AndeeTypeInput, position: WidgetPosition, length: WidgetLength,
-        colour: AndeeColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string, sliderSteps: number): Widget {
+    //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
+    export function createSliderWidget(id: WidgetId, widgetType: WidgetTypeInput, position: WidgetPosition, length: WidgetLength,
+        colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string, sliderSteps: number): Widget {
         let widget = new Widget();
         let imd: number;
 
@@ -531,7 +531,7 @@ namespace Andee {
 
 //////////////////////////////////////////////CONSTANTS//////////////////////////////////////////////
 
-enum AndeeColour {
+enum WidgetColour {
     //% block="Red"
     Red,
     //% block="Dark Red"
@@ -562,7 +562,7 @@ enum AndeeColour {
     Violet,
 }
 
-enum AndeeType {
+enum WidgetType {
     //% block="Data"
     Databox = 67,
     //% block="Data Circle"
@@ -577,7 +577,7 @@ enum AndeeType {
     Keyboard_In = 75,
 }
 
-enum AndeeTypeInput {
+enum WidgetTypeInput {
     //% block="Slider"
     Slider = 81,
     //% block="Analog Dial"
