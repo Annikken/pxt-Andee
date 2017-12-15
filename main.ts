@@ -211,8 +211,10 @@ namespace Andee {
         /**
          * Block to send acknowledgement back to app
          */
+		//% weight=10
         //% blockId=Andee_ack
         //% block="Send Ack%widget"
+		//% advanced=true
         public ack(): void {
             bleMsg = "";
             bleMsg = String.fromCharCode(UISTART) + ACKN + String.fromCharCode(SEP) + String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
@@ -359,9 +361,9 @@ namespace Andee {
      * Raises an Andee event in the event bus using PXT Control functions
      * @param id ID of the Widget, eg: WidgetId.Widget_1
      */
-    //% weight=20 blockGap=8 blockId="Andee_event" block="Andee Event|%id"
+    //% weight=20 blockGap=8 blockId="Andee_event" block="Widget Event|%id"
     //% blockExternalInputs=1
-    export function AndeeEvent(id: WidgetId, action: Action): void {
+    export function WidgetEvent(id: WidgetId, action: Action): void {
         control.onEvent(id + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE, action);
     }
 
