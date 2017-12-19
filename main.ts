@@ -59,7 +59,7 @@ namespace Andee {
         //% blockId=force_update
         //% block="Force %widget| to update"
         //% advanced=true
-        public resetUpdate(): void {
+        public forceUpdate(): void {
             this.widgetUpdate = 0;
         }
         /**
@@ -419,7 +419,7 @@ namespace Andee {
         widget.setUnit(unit);
 
         widget.setButtonInputMode(ButtonMode.MultiPress);
-        widget.resetUpdate();
+        widget.forceUpdate();
         return widget;
     }
     /**
@@ -476,7 +476,7 @@ namespace Andee {
         widget.setSliderInputMode(SliderMode.On_Finger_Release);
         widget.setMinMax(minValue, maxValue);
         widget.setSliderSteps(sliderSteps);
-        widget.resetUpdate();
+        widget.forceUpdate();
         return widget;
     }
     /**
