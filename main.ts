@@ -1,8 +1,4 @@
 
-/**
- * Use this file to define custom functions and blocks.
- * Read more at https://makecode.microbit.org/blocks/custom
- */
 let bleMsg: string;
 let bleReceive: string;
 let reply_flag: boolean;
@@ -38,12 +34,6 @@ namespace Andee {
         public setType(typeW: number): void {
             this.widgetType = typeW;
         }
-        // public get getId(): number {
-        //     return this.widgetId;
-        // }
-        // public getType(): number {
-        //     return this.widgetType;
-        // }
 
         public setMinMax(minW: string, maxW: string): void {
             this.widgetMinValue = minW;
@@ -211,10 +201,10 @@ namespace Andee {
         /**
          * Block to send acknowledgement back to app
          */
-		//% weight=10
+        //% weight=10
         //% blockId=Andee_ack
         //% block="Send Ack%widget"
-		//% advanced=true
+        //% advanced=true
         public ack(): void {
             bleMsg = "";
             bleMsg = String.fromCharCode(UISTART) + ACKN + String.fromCharCode(SEP) + String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
@@ -507,6 +497,24 @@ namespace Andee {
     export function getSlider(): number {
         return parseInt(ble_reply);
     }
+    /**
+     * Block to return value of button widget as a number
+     * @param value Number of Button Presses, eg: 0
+     */
+    //% weight=50
+    //% blockId=get_button_press
+    //% block="Button Press is %value| or more"
+    //% advanced=true
+    export function getButtonPress(value: number): boolean {
+        let buttonPress = ble_reply.charCodeAt(0) - 32
+        if (buttonPress >= value) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
     /**
      * Function to convert numbers to string
      * @param num Number to be converted to string
