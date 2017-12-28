@@ -498,16 +498,17 @@ namespace Andee {
         return parseInt(ble_reply);
     }
     /**
-     * Block to return value of button widget as a number
-     * @param value Number of Button Presses, eg: 0
+     * Block to return a boolean if button is pressed once or more than once
+     * Returns true if button is pressed more than once
+     * Returns false if button is pressed once
      */
     //% weight=50
     //% blockId=get_button_press
-    //% block="Button Press is %value| or more"
+    //% block="Button is pressed more than once"
     //% advanced=true
-    export function getButtonPress(value: number): boolean {
+    export function getButtonPress(): boolean {
         let buttonPress = ble_reply.charCodeAt(0) - 32
-        if (buttonPress >= value) {
+        if (buttonPress > 1) {
             return true
         }
         else {
