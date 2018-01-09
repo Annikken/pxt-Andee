@@ -688,7 +688,7 @@ const COMMANDEND = 0x0B;
 const UISTART = 0x04;
 const UIEND = 0x05;
 
-const SEP = 0xA6;
+const SEP = 0xFB;
 
 const EVENT_ID_OFFSET = 50;
 const ANDEE_EVENT_VALUE = 80;
