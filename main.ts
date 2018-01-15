@@ -25,6 +25,7 @@ namespace Andee {
         private widgetMaxValue: string;
         private widgetMinValue: string;
         private widgetSliderSteps: number;
+		private widgetSliderForceUpdate: number;
 
         private widgetUpdate: number;
 
@@ -143,6 +144,10 @@ namespace Andee {
         //% advanced=true
         public setData(data: string): void {
             this.widgetData = data;
+			if(this.widgetType == WidgetTypeInput.Slider)
+			{
+				this.widgetSliderForceUpdate = 49;
+			}
         }
         /**
          * Button widget has more than 1 input modes
@@ -297,7 +302,8 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetMaxValue +
                             String.fromCharCode(SEP) + this.widgetMinValue +
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetSliderSteps + 32) +
-                            String.fromCharCode(SEP) + "0" + String.fromCharCode(UIEND);
+                            String.fromCharCode(SEP) + String.fromCharCode(this.widgetSliderForceUpdate) + String.fromCharCode(UIEND);
+							this.widgetSliderForceUpdate = 48;
                         break;
                     case WidgetTypeInput.Analog_Dial:
                         bleMsg = String.fromCharCode(UISTART) + ANALOG_DIAL_OUT + String.fromCharCode(this.widgetId + 32) +
@@ -693,7 +699,7 @@ const SEP = 0xFB;
 const EVENT_ID_OFFSET = 50;
 const ANDEE_EVENT_VALUE = 80;
 
-let sendVersion: string = String.fromCharCode(VERSIONSTART) + "M" + String.fromCharCode(SEP) + "0.0.1" + String.fromCharCode(VERSIONEND);
+let sendVersion: string = String.fromCharCode(VERSIONSTART) + "M" + String.fromCharCode(SEP) + "1.0.0" + String.fromCharCode(VERSIONEND);
 
 const CLEAR = 'L';//
 const TIMEEPOCH = 'T';//
