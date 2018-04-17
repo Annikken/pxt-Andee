@@ -482,6 +482,7 @@ namespace Andee {
 	//% weight=10
     //% blockId=Andee_clear
     //% block="Clear All Widgets"
+	//% advanced=true
     export function clear(): void {
         bleMsg = String.fromCharCode(COMMANDSTART) + CLEAR + String.fromCharCode(COMMANDEND);
         bluetooth.uartWriteString(bleMsg);
@@ -531,6 +532,7 @@ namespace Andee {
     //% weight=20
     //% blockId=convert_number
     //% block="Convert %num| to String"
+	//% advanced=true
     export function convertNumberToString(num: number): string {
         let numString = num.toString();
         return numString;
