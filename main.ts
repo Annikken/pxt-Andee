@@ -188,6 +188,7 @@ namespace Andee {
          */
         //% blockId=Andee_remove
         //% block="Remove Widget%widget"
+		//% advanced=true
         public remove(): void {
             bleMsg = String.fromCharCode(UISTART) + REMOVE + String.fromCharCode(SEP) +
                 String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
@@ -357,7 +358,7 @@ namespace Andee {
      * Raises an Andee event in the event bus using PXT Control functions
      * @param id ID of the Widget, eg: WidgetId.Widget_1
      */
-    //% weight=20 blockGap=8 blockId="Andee_event" block="Widget Event|%id"
+    //% weight=60 blockGap=8 blockId="Andee_event" block="Widget Event|%id"
     //% blockExternalInputs=1
     export function WidgetEvent(id: WidgetId, action: Action): void {
         control.onEvent(id + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE, action);
@@ -478,6 +479,7 @@ namespace Andee {
     /**
      * Block to clear all Widgets
      */
+	//% weight=10
     //% blockId=Andee_clear
     //% block="Clear All Widgets"
     export function clear(): void {
