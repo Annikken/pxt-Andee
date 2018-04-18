@@ -186,7 +186,7 @@ namespace Andee {
          * Block to remove widgets individually
          * @param widget widget to be removed
          */
-		//% weight=1
+		//% weight=10
         //% blockId=Andee_remove
         //% block="Remove Widget%widget"
 		//% advanced=true
@@ -479,7 +479,7 @@ namespace Andee {
     /**
      * Block to clear all Widgets
      */
-	//% weight=3
+	//% weight=13
     //% blockId=Andee_clear
     //% block="Clear All Widgets"
 	//% advanced=true
@@ -529,7 +529,7 @@ namespace Andee {
      * Function to convert numbers to string
      * @param num Number to be converted to string
      */
-    //% weight=5
+    //% weight=15
     //% blockId=convert_number
     //% block="Convert %num| to String"
 	//% advanced=true
