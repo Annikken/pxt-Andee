@@ -57,7 +57,7 @@ namespace Andee {
          * The X coordinate of the top left hand corner of the widget
          * @param x Coordinate X of widget, eg: 5
          */
-        //% weight=75
+        //% weight=78
         //% blockId=set_widget_coordX
         //% block="Set Coordinate X of %widget| to %x"
         //% x.min=0 x.max=100
@@ -69,7 +69,7 @@ namespace Andee {
          * The Y coordinate of the top left hand corner of the widget
          * @param y Coordinate Y of widget, eg: 5
          */
-        //% weight=70
+        //% weight=75
         //% blockId=set_widget_coordY
         //% block="Set Coordinate Y of %widget| to %y"
         //% y.min=0 y.max=100
@@ -81,7 +81,7 @@ namespace Andee {
          * A width should be specified for each widget
          * @param w Set Widget Width, eg: 50
          */
-        //% weight=65
+        //% weight=83
         //% blockId=set_widget_width
         //% block="Set Width of %widget| to %w"
         //% w.min=0 w.max=100
@@ -93,7 +93,7 @@ namespace Andee {
          * A height should be specified for each widget
          * @param h Set Widget Height, eg: 25
          */
-        //% weight=60
+        //% weight=80
         //% blockId=set_widget_height
         //% block="Set Height of %widget| to %h"
         //% h.min=0 h.max=100
@@ -105,7 +105,7 @@ namespace Andee {
          * Each widget should have a colour
          * @param colour Set Widget Colour, eg: WidgetColour.Red
          */
-        //% weight=55
+        //% weight=93
         //% blockId=set_widget_colour
         //% block="Set Colour of %widget| to %colour"
         //% advanced=true
@@ -127,7 +127,7 @@ namespace Andee {
          * Units are optional
          * @param units Set Widget Units, eg: "Units"
          */
-        //% weight=85
+        //% weight=95
         //% blockId=set_widget_units
         //% block="Set Units of %widget| to %units"
         //% advanced=true
@@ -138,7 +138,7 @@ namespace Andee {
          * This can display data
          * @param data Set Widget Data, eg: "Data"
          */
-        //% weight=90
+        //% weight=98
         //% blockId=set_widget_data
         //% block="Set Data of %widget| to %data"
         //% advanced=true
@@ -358,7 +358,7 @@ namespace Andee {
      * Raises an Andee event in the event bus using PXT Control functions
      * @param id ID of the Widget, eg: WidgetId.Widget_1
      */
-    //% weight=60 blockGap=8 blockId="Andee_event" block="Widget Event|%id"
+    //% weight=70 blockGap=8 blockId="Andee_event" block="Widget Event|%id"
     //% blockExternalInputs=1
     export function WidgetEvent(id: WidgetId, action: Action): void {
         control.onEvent(id + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE, action);
@@ -375,7 +375,7 @@ namespace Andee {
      * @param data Widget Data Display, eg: "Data"
      * @param unit Widget Units Display, eg: "Units"
      */
-    //% weight=90
+    //% weight=95
     //% blockId=create_widget icon="\u0041
     //% block="Create Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Data%data|Widget Units%unit"
     //% widgetType.fieldEditor="gridpicker" widgetType.fieldOptions.columns=3
@@ -433,7 +433,7 @@ namespace Andee {
      * @param minValue Min Value for Display, eg: "0"
      * @param sliderSteps Number of steps for slider, eg: 100
      */
-    //% weight=88
+    //% weight=90
     //% blockId=create_slider_widget icon="\u0041
     //% block="Create Slider/|AnalogCircle Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
@@ -491,7 +491,7 @@ namespace Andee {
     /**
      * Block to return keyboard widget string
      */
-    //% weight=50
+    //% weight=65
     //% blockId=get_keyboard_reply
     //% block="Get Keyboard Reply"
     export function getKeyboard(): string {
