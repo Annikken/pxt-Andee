@@ -46,7 +46,7 @@ namespace Andee {
         /**
          * Force Widget to update
          */
-        //% weight=5
+        //% weight=67
         //% blockId=force_update
         //% block="Force %widget| to update"
         //% advanced=true
@@ -221,7 +221,7 @@ namespace Andee {
          * @param widget Widget Data to send to app 
          * @param loop Number of loops before updating widget, eg: 100
          */
-        //% weight=73
+        //% weight=70
         //% blockId=Andee_widget_update_loop
         //% block="Update Widget%widget| every %loop|loops"
         //% advanced=true
@@ -479,7 +479,7 @@ namespace Andee {
     /**
      * Block to clear all Widgets
      */
-	//% weight=5
+	//% weight=3
     //% blockId=Andee_clear
     //% block="Clear All Widgets"
 	//% advanced=true
@@ -511,7 +511,7 @@ namespace Andee {
      * Returns true if button is pressed more than once
      * Returns false if button is pressed once
      */
-    //% weight=50
+    //% weight=73
     //% blockId=get_button_press
     //% block="Button is pressed more than once"
     //% advanced=true
@@ -529,7 +529,7 @@ namespace Andee {
      * Function to convert numbers to string
      * @param num Number to be converted to string
      */
-    //% weight=20
+    //% weight=5
     //% blockId=convert_number
     //% block="Convert %num| to String"
 	//% advanced=true
