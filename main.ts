@@ -186,7 +186,7 @@ namespace Andee {
          * Block to remove widgets individually
          * @param widget widget to be removed
          */
-		//% weight=0
+		//% weight=1
         //% blockId=Andee_remove
         //% block="Remove Widget%widget"
 		//% advanced=true
