@@ -57,7 +57,7 @@ namespace Andee {
          * The X coordinate of the top left hand corner of the widget
          * @param x Coordinate X of widget, eg: 5
          */
-        //% weight=78
+        //% weight=85
         //% blockId=set_widget_coordX
         //% block="Set Coordinate X of %widget| to %x"
         //% x.min=0 x.max=100
@@ -69,7 +69,7 @@ namespace Andee {
          * The Y coordinate of the top left hand corner of the widget
          * @param y Coordinate Y of widget, eg: 5
          */
-        //% weight=75
+        //% weight=83
         //% blockId=set_widget_coordY
         //% block="Set Coordinate Y of %widget| to %y"
         //% y.min=0 y.max=100
@@ -81,7 +81,7 @@ namespace Andee {
          * A width should be specified for each widget
          * @param w Set Widget Width, eg: 50
          */
-        //% weight=83
+        //% weight=90
         //% blockId=set_widget_width
         //% block="Set Width of %widget| to %w"
         //% w.min=0 w.max=100
@@ -93,7 +93,7 @@ namespace Andee {
          * A height should be specified for each widget
          * @param h Set Widget Height, eg: 25
          */
-        //% weight=80
+        //% weight=87
         //% blockId=set_widget_height
         //% block="Set Height of %widget| to %h"
         //% h.min=0 h.max=100
@@ -153,7 +153,7 @@ namespace Andee {
          * Button widget has more than 1 input modes
          * @param mode Set Button Mode, eg: ButtonMode.Acknowledge
          */
-        //% weight=80
+        //% weight=78
         //% blockId=set_button_mode
         //% block="Set Button Mode of %widget| to %mode"
         //% advanced=true
@@ -175,7 +175,7 @@ namespace Andee {
          * Slider widget has more than 1 input modes
          * @param mode Set Slider Mode, eg: SliderMode.ON_FINGER_RELEASE
          */
-        //% weight=80
+        //% weight=79
         //% blockId=set_slider_mode
         //% block="Set Slider Mode of %widget| to %mode"
         //% advanced=true
@@ -186,6 +186,7 @@ namespace Andee {
          * Block to remove widgets individually
          * @param widget widget to be removed
          */
+		//% weight=0
         //% blockId=Andee_remove
         //% block="Remove Widget%widget"
 		//% advanced=true
@@ -210,7 +211,6 @@ namespace Andee {
         //% weight=10
         //% blockId=Andee_ack
         //% block="Send Ack%widget"
-        //% advanced=true
         public ack(): void {
             bleMsg = "";
             bleMsg = String.fromCharCode(UISTART) + ACKN + String.fromCharCode(SEP) + String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
@@ -221,7 +221,7 @@ namespace Andee {
          * @param widget Widget Data to send to app 
          * @param loop Number of loops before updating widget, eg: 100
          */
-        //% weight=20
+        //% weight=73
         //% blockId=Andee_widget_update_loop
         //% block="Update Widget%widget| every %loop|loops"
         //% advanced=true
@@ -479,7 +479,7 @@ namespace Andee {
     /**
      * Block to clear all Widgets
      */
-	//% weight=10
+	//% weight=5
     //% blockId=Andee_clear
     //% block="Clear All Widgets"
 	//% advanced=true
