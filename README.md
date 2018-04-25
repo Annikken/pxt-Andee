@@ -5,9 +5,9 @@ This PXT package is to enable the use of the Annikken Andee app on the BBC micro
 **For video examples on how to get started with Andee and create the widgets, [click here](https://www.annikken.com/micro-bit/get-started)**
 
 ---
-## Basic Usage {basic}
+## Basic Usage
 
-### Begin {begin}
+### Begin
 
 The ``||Andee.begin()||`` block is required to start using Andee widgets
 
@@ -15,12 +15,12 @@ The ``||Andee.begin()||`` block is required to start using Andee widgets
 Andee.begin();
 ```
 ---
-### Creating Widgets {create}
+### Creating Widgets
 	
 These are examples on how to create each type of widget that Andee supports.
 For explanation on all the properties of the widget [look here.](#parameter)
 
-#### Data Widget {databox}
+#### Data Widget
 ```blocks
 let widget = Andee.createWidget(
 WidgetId.Widget_1,
@@ -35,7 +35,7 @@ WidgetColour.Red,
 ```
 [How the widget looks](https://annikken.gitbooks.io/annikken-andee/content/About/uiType.html#databox)
 
-#### Circular Data Widget {datacircle}
+#### Circular Data Widget
 ```blocks
 let widget = Andee.createWidget(
 WidgetId.Widget_1,
@@ -51,7 +51,7 @@ WidgetColour.Red,
 [How the widget looks]()
 
 
-#### Header Widget {header}
+#### Header Widget
 ```blocks
 let widget = Andee.createWidget(
 WidgetId.Widget_1,
@@ -66,7 +66,7 @@ WidgetColour.Red,
 ```
 [How the widget looks]()
 
-#### Button Widget {button}
+#### Button Widget
 ```blocks
 let widget = Andee.createWidget(
 WidgetId.Widget_1,
@@ -81,7 +81,7 @@ WidgetColour.Red,
 ```
 [How the widget looks](https://annikken.gitbooks.io/annikken-andee/content/About/uiType.html#button)
 
-#### Circle Button Widget {buttoncircle}
+#### Circle Button Widget
 ```blocks
 let widget = Andee.createWidget(
 WidgetId.Widget_1,
@@ -96,7 +96,7 @@ WidgetColour.Red,
 ```
 [How the widget looks]()
 
-#### Keyboard Input Widget {keyboard}
+#### Keyboard Input Widget
 ```blocks
 let widget = Andee.createWidget(
 WidgetId.Widget_1,
@@ -111,7 +111,7 @@ WidgetColour.Red,
 ```
 [How the widget looks](https://annikken.gitbooks.io/annikken-andee/content/About/uiType.html#keyboard)
 
-#### Slider Widget {slider}
+#### Slider Widget
 ```blocks
 let widget = Andee.createSliderWidget(
 WidgetId.Widget_1,
@@ -129,7 +129,7 @@ WidgetColour.Red,
 ```
 [How the widget looks](https://annikken.gitbooks.io/annikken-andee/content/About/uiType.html#slider)
 
-#### Analog Circle Widget {analog}
+#### Analog Circle Widget
 ```blocks
 let widget = Andee.createSliderWidget(
 WidgetId.Widget_1,
@@ -148,7 +148,7 @@ WidgetColour.Red,
 [How the widget looks](https://annikken.gitbooks.io/annikken-andee/content/About/uiType.html#analog)
 
 ---
-### Displaying the widgets {update}
+### Displaying the widgets
 
 Once the widget parameters have been set, the block ``||widget.update()||`` has to be used for each widget created.This block will tell the app to draw out the widget or update it. 
 ```blocks
@@ -157,11 +157,11 @@ basic.forever(() => {
 })
 ```
 ---
-### Andee Events {event}
+### Andee Events
 
 This block is used to create triggers for widgets like buttons, sliders and keyboard. Users can specify the actions to be done when the events are triggered. Each event will be shown below. 
 
-#### Button Events {buttonevent}
+#### Button Events
 
 Button events work for both normal and circle buttons. For example, if a button widget with id 2 has been created, the event block needed is
 ```blocks
@@ -169,7 +169,7 @@ Andee.WidgetEvent(WidgetId.Widget_2, () => {
 });
 ```
 
-#### Slider Events {sliderevent}
+#### Slider Events
 ```blocks
 Andee.WidgetEvent(WidgetId.Widget_3, () => {
 	let reply = Andee.getSlider();
@@ -177,7 +177,7 @@ Andee.WidgetEvent(WidgetId.Widget_3, () => {
 ```
 *Note: For sliders, a variable has to be created to store the value from the slider widget. ``||Andee.getSlider()||`` returns a `number`*
 
-#### Keyboard Input Events {keyevent}
+#### Keyboard Input Events
 ```blocks
 Andee.WidgetEvent(WidgetId.Widget_1, () => {
 	let reply = Andee.getKeyboard();
@@ -198,7 +198,7 @@ The properties are
   7. **Units** Text located in the widget
   8. **Position** This variable controls the position of the widget in the app. In Makecode, when the position dropdown is clicked, there will be a table with 4 rows and columns. The widget will appear in the location the user specify.
 ---
-## Advanced Usage {advance}
+## Advanced Usage
 
 ### Changing Widget Properties 
 
@@ -319,7 +319,7 @@ Andee.WidgetEvent(WidgetId.Widget_2, () => {
     }
 })
 ```
-
+---
 ### Update Widget every ___ loops
 This block will cause the widget to send an update after a specified number of loops have passed. All widgets will update after 100 loops as a default. If a more frequent update is required for faster response, this block should be used
 ```blocks
@@ -327,7 +327,7 @@ basic.forever(() => {
 	widget.updateLoop(50)
 })
 ```
-
+---
 ### Force Widget update
 This block forces the widget to update immediately
 ```blocks
@@ -335,7 +335,7 @@ basic.forever(() => {
 	widget.forceUpdate()
 })
 ```
-
+---
 ### Convert to String
 This block converts numbers to `string`. Usually used when a number is needed to be displayed on ``||widget.setData()||`` , ``||widget.setTitle()||`` or ``||widget.setUnit()||``
 ```blocks
@@ -344,7 +344,7 @@ basic.forever(() => {
 	widget.setData(Andee.convertNumberToString(value));
 })
 ```
-
+---
 ### Clear All widgets
 This block will clear all widgets in the app. Use ``||widget.update()||`` block to display the widgets again
 ```blocks
@@ -352,7 +352,7 @@ basic.forever(() => {
 	Andee.clear()
 })
 ```
-
+---
 ### Remove Widget
 This block will clear a widget one at a time
 ```blocks
