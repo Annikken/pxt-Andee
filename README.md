@@ -2,6 +2,22 @@
 
 This PXT package is to enable the use of the Annikken Andee app on the BBC micro:bit. Users can create UI widgets like sliders, buttons and more to control the micro:bit using their BLE enabled smartphone/tablets.
 
+## Getting Started with Andee on micro:bit
+
+No extra hardware is required to use Andee on the micro:bit. Andee uses the BLE that is already present on the micro:bit. Andee might not be compatible with other packages running BLE
+
+Andee can be used either with the paired connection or the unpaired one. We recommend using the paired connection especially when there are multiple micro:bits running Andee in close proximity to each other.
+
+[For more information about how Bluetooth pairing on the micro:bit works and how to pair,click here](https://makecode.microbit.org/reference/bluetooth/bluetooth-pairing)
+
+If you are unable to pair your micro:bit to your mobile device or would prefer not to pair the micro:bit to your device, you can follow the steps below:
+1. In the Makecode editor, click on the gear icon on the right hand corner of the window
+2. Click on `Project Settings` 
+3. Click the switch that says `No Pairing Required: Anyone can connect via Bluetooth.`
+4. Then click `Save`
+
+The Andee app will now be able to scan and detect your micro:bit 
+
 **For video examples on how to get started with Andee and create the widgets, [click here](https://www.annikken.com/micro-bit/get-started)**
 
 ---
