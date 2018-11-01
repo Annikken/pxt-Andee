@@ -40,7 +40,6 @@ WidgetColour.Blue,
 )
 slider = Andee.createSliderWidget(
 WidgetId.Widget_4,
-WidgetTypeInput.Slider,
 WidgetPosition.Row2_Column0,
 WidgetLength.Full,
 WidgetColour.Orange,
@@ -51,9 +50,8 @@ WidgetColour.Orange,
 "0",
 100
 )
-analog = Andee.createSliderWidget(
+analog = Andee.createAnalogCircleWidget(
 WidgetId.Widget_5,
-WidgetTypeInput.Analog_Dial,
 WidgetPosition.Row3_Column0,
 WidgetLength.Full,
 WidgetColour.Indigo,
@@ -61,8 +59,7 @@ WidgetColour.Indigo,
 "Test",
 "50",
 "100",
-"0",
-100
+"0"
 )
 
 Andee.WidgetEvent(WidgetId.Widget_2, () => {

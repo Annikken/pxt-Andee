@@ -25,7 +25,7 @@ namespace Andee {
         private widgetMaxValue: string;
         private widgetMinValue: string;
         private widgetSliderSteps: number;
-		private widgetSliderForceUpdate: number;
+        private widgetSliderForceUpdate: number;
 
         private widgetUpdate: number;
 
@@ -144,10 +144,9 @@ namespace Andee {
         //% advanced=true
         public setData(data: string): void {
             this.widgetData = data;
-			if(this.widgetType == WidgetTypeInput.Slider)
-			{
-				this.widgetSliderForceUpdate = 49;
-			}
+            if (this.widgetType == WidgetTypeInput.Slider) {
+                this.widgetSliderForceUpdate = 49;
+            }
         }
         /**
          * Button widget has more than 1 input modes
@@ -186,10 +185,10 @@ namespace Andee {
          * Block to remove widgets individually
          * @param widget widget to be removed
          */
-		//% weight=10
+        //% weight=10
         //% blockId=Andee_remove
         //% block="Remove Widget%widget"
-		//% advanced=true
+        //% advanced=true
         public remove(): void {
             bleMsg = String.fromCharCode(UISTART) + REMOVE + String.fromCharCode(SEP) +
                 String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
@@ -304,7 +303,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetMinValue +
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetSliderSteps + 32) +
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetSliderForceUpdate) + String.fromCharCode(UIEND);
-							this.widgetSliderForceUpdate = 48;
+                        this.widgetSliderForceUpdate = 48;
                         break;
                     case WidgetTypeInput.Analog_Dial:
                         bleMsg = String.fromCharCode(UISTART) + ANALOG_DIAL_OUT + String.fromCharCode(this.widgetId + 32) +
@@ -420,9 +419,8 @@ namespace Andee {
         return widget;
     }
     /**
-     * Create Slider/Analog Circle Widget
+     * Create Slider Widget
      * @param id ID of Widget, eg: WidgetId.Widget_1
-     * @param widgetType Type of Widget, eg: WidgetTypeInput.Slider
      * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
      * @param length Length of Widget, eg: WidgetLength.Full
      * @param colour Colour of Widget, eg: WidgetColour.Red
@@ -435,16 +433,15 @@ namespace Andee {
      */
     //% weight=90
     //% blockId=create_slider_widget icon="\u0041
-    //% block="Create Slider/|AnalogCircle Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
+    //% block="Create Slider Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
-    export function createSliderWidget(id: WidgetId, widgetType: WidgetTypeInput, position: WidgetPosition, length: WidgetLength,
+    export function createSliderWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
         colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string, sliderSteps: number): Widget {
         let widget = new Widget();
         let imd: number;
 
         widget.setId(id);
-        widget.setType(widgetType);
         widget.setColour(colour);
 
         widget.setHeight(20);
@@ -477,12 +474,64 @@ namespace Andee {
         return widget;
     }
     /**
+     * Create Analog Circle Widget
+     * @param id ID of Widget, eg: WidgetId.Widget_1
+     * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
+     * @param length Length of Widget, eg: WidgetLength.Full
+     * @param colour Colour of Widget, eg: WidgetColour.Red
+     * @param title Title of Widget, eg: "Title"     
+     * @param unit Widget Units Display,eg: "Units"
+     * @param currentValue Widget Current Value for Display, eg: "0"
+     * @param maxValue Max Value for Display, eg: "100"
+     * @param minValue Min Value for Display, eg: "0"
+     */
+    //% weight=90
+    //% blockId=create_slider_widget icon="\u0041
+    //% block="Create Analog Circle Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue"
+    //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
+    //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
+    export function createAnalogCircleWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
+        colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string): Widget {
+        let widget = new Widget();
+        let imd: number;
+
+        widget.setId(id);
+        widget.setColour(colour);
+
+        widget.setHeight(20);
+        imd = position / 4;
+        widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
+        imd = position - ((position / 4) * 4);
+        widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
+
+        switch (length) {
+            case WidgetLength.One_Quarter: //one_quarter
+                widget.setWidth(20);
+                break;
+            case WidgetLength.Half: //half
+                widget.setWidth(44);
+                break;
+            case WidgetLength.Full: //full
+                widget.setWidth(92);
+                break;
+            default:
+                serial.writeString("length error");
+                break;
+        }
+        widget.setTitle(title);
+        widget.setData(currentValue);
+        widget.setUnit(unit);
+        widget.setMinMax(minValue, maxValue);
+        widget.forceUpdate();
+        return widget;
+    }
+    /**
      * Block to clear all Widgets
      */
-	//% weight=13
+    //% weight=13
     //% blockId=Andee_clear
     //% block="Clear All Widgets"
-	//% advanced=true
+    //% advanced=true
     export function clear(): void {
         bleMsg = String.fromCharCode(COMMANDSTART) + CLEAR + String.fromCharCode(COMMANDEND);
         bluetooth.uartWriteString(bleMsg);
@@ -532,7 +581,7 @@ namespace Andee {
     //% weight=15
     //% blockId=convert_number
     //% block="Convert %num| to String"
-	//% advanced=true
+    //% advanced=true
     export function convertNumberToString(num: number): string {
         let numString = num.toString();
         return numString;
