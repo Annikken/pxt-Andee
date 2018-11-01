@@ -485,8 +485,8 @@ namespace Andee {
      * @param maxValue Max Value for Display, eg: "100"
      * @param minValue Min Value for Display, eg: "0"
      */
-    //% weight=90
-    //% blockId=create_slider_widget icon="\u0041
+    //% weight=91
+    //% blockId=create_analogcircle_widget icon="\u0041
     //% block="Create Analog Circle Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
