@@ -431,7 +431,7 @@ namespace Andee {
      * @param minValue Min Value for Display, eg: "0"
      * @param sliderSteps Number of steps for slider, eg: 100
      */
-    //% weight=90
+    //% weight=91
     //% blockId=create_slider_widget icon="\u0041
     //% block="Create Slider Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
@@ -485,7 +485,7 @@ namespace Andee {
      * @param maxValue Max Value for Display, eg: "100"
      * @param minValue Min Value for Display, eg: "0"
      */
-    //% weight=91
+    //% weight=9
     //% blockId=create_analogcircle_widget icon="\u0041
     //% block="Create Analog Circle Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
