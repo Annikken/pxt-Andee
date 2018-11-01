@@ -323,7 +323,7 @@ namespace Andee {
                         break;
                 }
                 /////////////////////////////////Sending data to BLE////////////////////////////////////            
-                //packetBreak = Math.idiv(bleMsg.length, 20) + 1;//idiv is supposedly for INT division
+                packetBreak = (bleMsg.length/20) + 1 //Math.idiv(bleMsg.length, 20) + 1;//idiv is supposedly for INT division
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
