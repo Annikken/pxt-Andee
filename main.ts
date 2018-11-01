@@ -323,7 +323,7 @@ namespace Andee {
                         break;
                 }
                 /////////////////////////////////Sending data to BLE////////////////////////////////////            
-                packetBreak = Math.idiv(bleMsg.length, 20) + 1;//idiv is supposedly for INT division
+                packetBreak = (bleMsg.length/20) + 1 //Math.idiv(bleMsg.length, 20) + 1;//idiv is supposedly for INT division
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
@@ -368,7 +368,7 @@ namespace Andee {
      * @param id ID of Widget, eg: WidgetId.Widget_1
      * @param widgetType Type of Widget, eg: WidgetType.Databox
      * @param position Position of Widget, eg: WidgetPosition.Row0_Column0
-     * @param wLength Length of Widget, eg: WidgetLength.Half
+     * @param length Length of Widget, eg: WidgetLength.Half
      * @param colour Colour of Widget, eg: WidgetColour.Red
      * @param title Title of Widget, eg: "Title"
      * @param data Widget Data Display, eg: "Data"
@@ -380,7 +380,7 @@ namespace Andee {
     //% widgetType.fieldEditor="gridpicker" widgetType.fieldOptions.columns=3
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
-    export function createWidget(id: WidgetId, widgetType: WidgetType, position: WidgetPosition, wLength: WidgetLength,
+    export function createWidget(id: WidgetId, widgetType: WidgetType, position: WidgetPosition, length: WidgetLength,
         colour: WidgetColour, title: string, data: string, unit: string): Widget {
         let widget = new Widget();
         let imd: number;
@@ -395,7 +395,7 @@ namespace Andee {
         imd = position - (Math.idiv(position, 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
-        switch (wLength) {
+        switch (length) {
             case WidgetLength.One_Quarter: //one_quarter
                 widget.setWidth(20);
                 break;
@@ -422,7 +422,7 @@ namespace Andee {
      * Create Slider Widget
      * @param id ID of Widget, eg: WidgetId.Widget_1
      * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
-     * @param wLength Length of Widget, eg: WidgetLength.Full
+     * @param length Length of Widget, eg: WidgetLength.Full
      * @param colour Colour of Widget, eg: WidgetColour.Red
      * @param title Title of Widget, eg: "Title"     
      * @param unit Widget Units Display,eg: "Units"
@@ -436,7 +436,7 @@ namespace Andee {
     //% block="Create Slider Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
-    export function createSliderWidget(id: WidgetId, position: WidgetPosition, wLength: WidgetLength,
+    export function createSliderWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
         colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string, sliderSteps: number): Widget {
         let widget = new Widget();
         let imd: number;
@@ -450,7 +450,7 @@ namespace Andee {
         imd = position - (Math.idiv(position, 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
-        switch (wLength) {
+        switch (length) {
             case WidgetLength.One_Quarter: //one_quarter
                 widget.setWidth(20);
                 break;
@@ -477,7 +477,7 @@ namespace Andee {
      * Create Analog Circle Widget
      * @param id ID of Widget, eg: WidgetId.Widget_1
      * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
-     * @param wLength Length of Widget, eg: WidgetLength.Full
+     * @param length Length of Widget, eg: WidgetLength.Full
      * @param colour Colour of Widget, eg: WidgetColour.Red
      * @param title Title of Widget, eg: "Title"     
      * @param unit Widget Units Display,eg: "Units"
@@ -490,7 +490,7 @@ namespace Andee {
     //% block="Create Analog Circle Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
-    export function createAnalogCircleWidget(id: WidgetId, position: WidgetPosition, wLength: WidgetLength,
+    export function createAnalogCircleWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
         colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string): Widget {
         let widget = new Widget();
         let imd: number;
@@ -504,7 +504,7 @@ namespace Andee {
         imd = position - (Math.idiv(position, 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
-        switch (wLength) {
+        switch (length) {
             case WidgetLength.One_Quarter: //one_quarter
                 widget.setWidth(20);
                 break;
