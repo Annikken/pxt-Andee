@@ -1,4 +1,3 @@
-
 let bleMsg: string;
 let bleReceive: string;
 let reply_flag: boolean;
@@ -323,7 +322,7 @@ namespace Andee {
                         break;
                 }
                 /////////////////////////////////Sending data to BLE////////////////////////////////////            
-                packetBreak = (bleMsg.length/20) + 1 //Math.idiv(bleMsg.length, 20) + 1;//idiv is supposedly for INT division
+                packetBreak = (bleMsg.length / 20) + 1;
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
@@ -390,9 +389,9 @@ namespace Andee {
         widget.setColour(colour);
 
         widget.setHeight(20);
-        imd = Math.idiv(position, 4);
+        imd = position / 4;
         widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
-        imd = position - (Math.idiv(position, 4) * 4);
+        imd = position - ((position / 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
         switch (length) {
@@ -419,8 +418,9 @@ namespace Andee {
         return widget;
     }
     /**
-     * Create Slider Widget
+     * Create Slider/Analog Circle Widget
      * @param id ID of Widget, eg: WidgetId.Widget_1
+     * @param widgetType Type of Widget, eg: WidgetTypeInput.Slider
      * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
      * @param length Length of Widget, eg: WidgetLength.Full
      * @param colour Colour of Widget, eg: WidgetColour.Red
@@ -431,23 +431,24 @@ namespace Andee {
      * @param minValue Min Value for Display, eg: "0"
      * @param sliderSteps Number of steps for slider, eg: 100
      */
-    //% weight=91
+    //% weight=90
     //% blockId=create_slider_widget icon="\u0041
-    //% block="Create Slider Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
+    //% block="Create Slider/|AnalogCircle Widget: %id|Widget Type%widgetType|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue|No. of Steps%sliderSteps"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
-    export function createSliderWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
+    export function createSliderWidget(id: WidgetId, widgetType: WidgetTypeInput, position: WidgetPosition, length: WidgetLength,
         colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string, sliderSteps: number): Widget {
         let widget = new Widget();
         let imd: number;
 
         widget.setId(id);
+        widget.setType(widgetType);
         widget.setColour(colour);
 
         widget.setHeight(20);
-        imd = Math.idiv(position, 4);
+        imd = position / 4;
         widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
-        imd = position - (Math.idiv(position, 4) * 4);
+        imd = position - ((position / 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
         switch (length) {
@@ -473,59 +474,6 @@ namespace Andee {
         widget.forceUpdate();
         return widget;
     }
-    /**
-     * Create Analog Circle Widget
-     * @param id ID of Widget, eg: WidgetId.Widget_1
-     * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
-     * @param length Length of Widget, eg: WidgetLength.Full
-     * @param colour Colour of Widget, eg: WidgetColour.Red
-     * @param title Title of Widget, eg: "Title"     
-     * @param unit Widget Units Display,eg: "Units"
-     * @param currentValue Widget Current Value for Display, eg: "0"
-     * @param maxValue Max Value for Display, eg: "100"
-     * @param minValue Min Value for Display, eg: "0"
-     */
-    //% weight=9
-    //% blockId=create_analogcircle_widget icon="\u0041
-    //% block="Create Analog Circle Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|Widget Units%unit|Current Value%currentValue|Max Value%maxValue|Min Value%minValue"
-    //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
-    //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
-    export function createAnalogCircleWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
-        colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string): Widget {
-        let widget = new Widget();
-        let imd: number;
-
-        widget.setId(id);
-        widget.setColour(colour);
-
-        widget.setHeight(20);
-        imd = Math.idiv(position, 4);
-        widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
-        imd = position - (Math.idiv(position, 4) * 4);
-        widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
-
-        switch (length) {
-            case WidgetLength.One_Quarter: //one_quarter
-                widget.setWidth(20);
-                break;
-            case WidgetLength.Half: //half
-                widget.setWidth(44);
-                break;
-            case WidgetLength.Full: //full
-                widget.setWidth(92);
-                break;
-            default:
-                serial.writeString("length error");
-                break;
-        }
-        widget.setTitle(title);
-        widget.setData(currentValue);
-        widget.setUnit(unit);
-        widget.setMinMax(minValue, maxValue);
-        widget.forceUpdate();
-        return widget;
-    }
-
     /**
      * Block to clear all Widgets
      */

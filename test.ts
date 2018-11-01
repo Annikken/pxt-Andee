@@ -9,58 +9,58 @@ let value = 0
 
 Andee.begin()
 dataDisplay = Andee.createWidget(
-WidgetId.Widget_1,
-WidgetType.Databox,
-WidgetPosition.Row0_Column0,
-WidgetLength.Full,
-WidgetColour.Red,
-"Widget",
-"Databox",
-"Test"
+    WidgetId.Widget_1,
+    WidgetType.Databox,
+    WidgetPosition.Row0_Column0,
+    WidgetLength.Full,
+    WidgetColour.Red,
+    "Widget",
+    "Databox",
+    "Test"
 )
 button = Andee.createWidget(
-WidgetId.Widget_2,
-WidgetType.Button,
-WidgetPosition.Row1_Column0,
-WidgetLength.Half,
-WidgetColour.Green,
-"Press me!",
-"Data",
-"Units"
+    WidgetId.Widget_2,
+    WidgetType.Button,
+    WidgetPosition.Row1_Column0,
+    WidgetLength.Half,
+    WidgetColour.Green,
+    "Press me!",
+    "Data",
+    "Units"
 )
 keyboard = Andee.createWidget(
-WidgetId.Widget_3,
-WidgetType.Keyboard_In,
-WidgetPosition.Row1_Column2,
-WidgetLength.Half,
-WidgetColour.Blue,
-"Press me!",
-"Data",
-"Units"
+    WidgetId.Widget_3,
+    WidgetType.Keyboard_In,
+    WidgetPosition.Row1_Column2,
+    WidgetLength.Half,
+    WidgetColour.Blue,
+    "Press me!",
+    "Data",
+    "Units"
 )
-slider = Andee.createSliderWidget(
-WidgetId.Widget_4,
-WidgetPosition.Row2_Column0,
-WidgetLength.Full,
-WidgetColour.Orange,
-"Move to change value",
-"Test",
-"50",
-"100",
-"0",
-100
-)
-analog = Andee.createAnalogCircleWidget(
-WidgetId.Widget_5,
-WidgetPosition.Row3_Column0,
-WidgetLength.Full,
-WidgetColour.Indigo,
-"Slider Value",
-"Test",
-"50",
-"100",
-"0"
-)
+// slider = Andee.createSliderWidget(
+//     WidgetId.Widget_4,
+//     WidgetPosition.Row2_Column0,
+//     WidgetLength.Full,
+//     WidgetColour.Orange,
+//     "Move to change value",
+//     "Test",
+//     "50",
+//     "100",
+//     "0",
+//     100
+// )
+// analog = Andee.createAnalogCircleWidget(
+//     WidgetId.Widget_5,
+//     WidgetPosition.Row3_Column0,
+//     WidgetLength.Full,
+//     WidgetColour.Indigo,
+//     "Slider Value",
+//     "Test",
+//     "50",
+//     "100",
+//     "0"
+// )
 
 Andee.WidgetEvent(WidgetId.Widget_2, () => {
     dataDisplay.setData("Data")
@@ -77,8 +77,7 @@ Andee.WidgetEvent(WidgetId.Widget_4, () => {
 
 basic.forever(() => {
     analog.updateLoop(20)
-    button.updateLoop(80)
-    dataDisplay.updateLoop(25)
-    keyboard.updateLoop(85)
-    slider.updateLoop(90)
+    // button.updateLoop(80)
+    // dataDisplay.updateLoop(25)
+    // keyboard.updateLoop(85)
 })
