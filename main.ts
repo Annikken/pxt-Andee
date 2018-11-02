@@ -322,7 +322,7 @@ namespace Andee {
                         break;
                 }
                 /////////////////////////////////Sending data to BLE////////////////////////////////////            
-                packetBreak = (bleMsg.length / 20) + 1;
+                packetBreak = Math.idiv(bleMsg.length,20) + 1;
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
@@ -389,9 +389,9 @@ namespace Andee {
         widget.setColour(colour);
 
         widget.setHeight(20);
-        imd = position / 4;
+        imd = Math.idiv(position,4);
         widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
-        imd = position - ((position / 4) * 4);
+        imd = position - (Math.idiv(position, 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
         switch (length) {
@@ -446,9 +446,9 @@ namespace Andee {
         widget.setColour(colour);
 
         widget.setHeight(20);
-        imd = position / 4;
+        imd = Math.idiv(position, 4);
         widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
-        imd = position - ((position / 4) * 4);
+        imd = position - (Math.idiv(position, 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
         switch (length) {

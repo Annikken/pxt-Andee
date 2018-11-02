@@ -70,14 +70,14 @@ Andee.WidgetEvent(WidgetId.Widget_3, () => {
     text = Andee.getKeyboard()
     dataDisplay.setData(text)
 })
-Andee.WidgetEvent(WidgetId.Widget_4, () => {
-    value = Andee.getSlider()
-    analog.setData(Andee.convertNumberToString(value))
-})
+// Andee.WidgetEvent(WidgetId.Widget_4, () => {
+//     value = Andee.getSlider()
+//     analog.setData(Andee.convertNumberToString(value))
+// })
 
 basic.forever(() => {
-    analog.updateLoop(20)
-    // button.updateLoop(80)
-    // dataDisplay.updateLoop(25)
-    // keyboard.updateLoop(85)
+    // analog.updateLoop(20)
+    button.updateLoop(80)
+    dataDisplay.updateLoop(25)
+    keyboard.updateLoop(85)
 })
