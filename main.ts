@@ -120,7 +120,8 @@ namespace Andee {
         //% block="Set Title of %widget| to %title"
         //% advanced=true
         public setTitle(title: string): void {
-            this.widgetTitle = title;
+
+            this.widgetTitle = trimString(title);
         }
         /**
          * Units are optional
@@ -131,7 +132,7 @@ namespace Andee {
         //% block="Set Units of %widget| to %units"
         //% advanced=true
         public setUnit(units: string): void {
-            this.widgetUnit = units;
+            this.widgetUnit = trimString(units);
         }
         /**
          * This can display data
@@ -142,7 +143,7 @@ namespace Andee {
         //% block="Set Data of %widget| to %data"
         //% advanced=true
         public setData(data: string): void {
-            this.widgetData = data;
+            this.widgetData = trimString(data);
             if (this.widgetType == WidgetTypeInput.Slider) {
                 this.widgetSliderForceUpdate = 49;
             }
@@ -549,7 +550,8 @@ namespace Andee {
     export function trimString(str: string): string {
         if (str.length > 16)
         {
-            return str.substr(0,16);
+            str + "..";
+            return str.substr(0,18);
         }
         else{
             return str;
