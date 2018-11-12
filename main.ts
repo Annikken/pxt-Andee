@@ -158,7 +158,7 @@ namespace Andee {
         /**
          * Keyboard widget has more than 1 input modes
          * @param mode Set Button Mode, eg: KeyboardMode.AlphaNumeric
-         */        
+         */
         public setKeyboardInputMode(mode: KeyboardMode): void {
             this.widgetInputMode = String.fromCharCode(mode);
         }
@@ -319,6 +319,7 @@ namespace Andee {
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
+                    basic.pause(10);
                     //serial.writeLine(tempString);
                 }
                 this.widgetUpdate = 1;
