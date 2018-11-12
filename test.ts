@@ -3,7 +3,6 @@ let slider: Andee.Widget = null
 let button: Andee.Widget = null
 let text = ""
 let keyboard: Andee.Widget = null
-let analog: Andee.Widget = null
 let dataDisplay: Andee.Widget = null
 let value = 0
 
@@ -38,32 +37,22 @@ keyboard = Andee.createWidget(
     "Data",
     "Units"
 )
-// slider = Andee.createSliderWidget(
-//     WidgetId.Widget_4,
-//     WidgetPosition.Row2_Column0,
-//     WidgetLength.Full,
-//     WidgetColour.Orange,
-//     "Move to change value",
-//     "Test",
-//     "50",
-//     "100",
-//     "0",
-//     100
-// )
-// analog = Andee.createAnalogCircleWidget(
-//     WidgetId.Widget_5,
-//     WidgetPosition.Row3_Column0,
-//     WidgetLength.Full,
-//     WidgetColour.Indigo,
-//     "Slider Value",
-//     "Test",
-//     "50",
-//     "100",
-//     "0"
-// )
+slider = Andee.createSliderWidget(
+    WidgetId.Widget_4,
+    WidgetTypeInput.Slider,
+    WidgetPosition.Row2_Column0,
+    WidgetLength.Full,
+    WidgetColour.Orange,
+    "Move to change value",
+    "Test",
+    "50",
+    100,
+    0,
+    100
+)
 
 Andee.WidgetEvent(WidgetId.Widget_2, () => {
-    dataDisplay.setData("Data")
+    dataDisplay.setData("Button Pressed")
 })
 Andee.WidgetEvent(WidgetId.Widget_3, () => {
     keyboard.ack()
@@ -76,8 +65,8 @@ Andee.WidgetEvent(WidgetId.Widget_3, () => {
 // })
 
 basic.forever(() => {
-    // analog.updateLoop(20)
     button.updateLoop(80)
-    dataDisplay.updateLoop(25)
+    dataDisplay.updateLoop(52)
     keyboard.updateLoop(85)
+    slider.updateLoop(50)
 })
