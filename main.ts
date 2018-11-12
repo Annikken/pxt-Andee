@@ -319,6 +319,7 @@ namespace Andee {
             else {
                 this.widgetUpdate += 1;
             }
+            ble_reply = ""
         }
 
 
