@@ -152,21 +152,13 @@ namespace Andee {
          * Button widget has more than 1 input modes
          * @param mode Set Button Mode, eg: ButtonMode.Acknowledge
          */
-        //% weight=78
-        //% blockId=set_button_mode
-        //% block="Set Button Mode of %widget| to %mode"
-        //% advanced=true
         public setButtonInputMode(mode: ButtonMode): void {
             this.widgetInputMode = String.fromCharCode(mode);
         }
         /**
          * Keyboard widget has more than 1 input modes
          * @param mode Set Button Mode, eg: KeyboardMode.AlphaNumeric
-         */
-        //% weight=80
-        //% blockId=set_keyboard_mode
-        //% block="Set Keyboard Mode of %widget| to %mode"
-        //% advanced=true
+         */        
         public setKeyboardInputMode(mode: KeyboardMode): void {
             this.widgetInputMode = String.fromCharCode(mode);
         }
@@ -548,12 +540,11 @@ namespace Andee {
     }
 
     export function trimString(str: string): string {
-        if (str.length > 16)
-        {
+        if (str.length > 16) {
             str + "..";
-            return str.substr(0,18);
+            return str.substr(0, 18);
         }
-        else{
+        else {
             return str;
         }
     }
