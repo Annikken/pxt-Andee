@@ -2,6 +2,7 @@ let bleMsg: string;
 let bleReceive: string;
 let reply_flag: boolean;
 let ble_reply: string;
+let tempString: string;
 /**
  * Custom blocks
  */
@@ -20,9 +21,9 @@ namespace Andee {
         private widgetData: string;
         private widgetUnit: string;
 
-        private widgetInputMode: string;
-        private widgetMaxValue: string;
-        private widgetMinValue: string;
+        private widgetInputMode: number;
+        private widgetMaxValue: number;
+        private widgetMinValue: number;
         private widgetSliderSteps: number;
         private widgetSliderForceUpdate: number;
 
@@ -30,12 +31,13 @@ namespace Andee {
 
         public setId(ID: WidgetId): void {
             this.widgetId = ID;
+            this.widgetInputMode = 48;
         }
         public setType(typeW: number): void {
             this.widgetType = typeW;
         }
 
-        public setMinMax(minW: string, maxW: string): void {
+        public setMinMax(minW: number, maxW: number): void {
             this.widgetMinValue = minW;
             this.widgetMaxValue = maxW;
         }
@@ -120,7 +122,8 @@ namespace Andee {
         //% block="Set Title of %widget| to %title"
         //% advanced=true
         public setTitle(title: string): void {
-            this.widgetTitle = title;
+
+            this.widgetTitle = trimString(title);
         }
         /**
          * Units are optional
@@ -131,7 +134,7 @@ namespace Andee {
         //% block="Set Units of %widget| to %units"
         //% advanced=true
         public setUnit(units: string): void {
-            this.widgetUnit = units;
+            this.widgetUnit = trimString(units);
         }
         /**
          * This can display data
@@ -142,43 +145,21 @@ namespace Andee {
         //% block="Set Data of %widget| to %data"
         //% advanced=true
         public setData(data: string): void {
-            this.widgetData = data;
+            this.widgetData = trimString(data);
             if (this.widgetType == WidgetTypeInput.Slider) {
                 this.widgetSliderForceUpdate = 49;
             }
         }
         /**
-         * Button widget has more than 1 input modes
-         * @param mode Set Button Mode, eg: ButtonMode.Acknowledge
-         */
-        //% weight=78
-        //% blockId=set_button_mode
-        //% block="Set Button Mode of %widget| to %mode"
-        //% advanced=true
-        public setButtonInputMode(mode: ButtonMode): void {
-            this.widgetInputMode = String.fromCharCode(mode);
-        }
-        /**
          * Keyboard widget has more than 1 input modes
          * @param mode Set Button Mode, eg: KeyboardMode.AlphaNumeric
          */
-        //% weight=80
-        //% blockId=set_keyboard_mode
+        //% weight=79
+        //% blockId=set_kb_mode
         //% block="Set Keyboard Mode of %widget| to %mode"
         //% advanced=true
         public setKeyboardInputMode(mode: KeyboardMode): void {
-            this.widgetInputMode = String.fromCharCode(mode);
-        }
-        /**
-         * Slider widget has more than 1 input modes
-         * @param mode Set Slider Mode, eg: SliderMode.ON_FINGER_RELEASE
-         */
-        //% weight=79
-        //% blockId=set_slider_mode
-        //% block="Set Slider Mode of %widget| to %mode"
-        //% advanced=true
-        public setSliderInputMode(mode: SliderMode): void {
-            this.widgetInputMode = String.fromCharCode(mode);
+            this.widgetInputMode = mode;
         }
         /**
          * Block to remove widgets individually
@@ -192,6 +173,7 @@ namespace Andee {
             bleMsg = String.fromCharCode(UISTART) + REMOVE + String.fromCharCode(SEP) +
                 String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
             bluetooth.uartWriteString(bleMsg);
+            bleMsg = "";
         }
         /**
          * Update Block to update widget properties   
@@ -213,6 +195,7 @@ namespace Andee {
             bleMsg = "";
             bleMsg = String.fromCharCode(UISTART) + ACKN + String.fromCharCode(SEP) + String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
             bluetooth.uartWriteString(bleMsg);
+            bleMsg = "";
         }
         /**
          * Update Block to update widget properties   
@@ -225,10 +208,10 @@ namespace Andee {
         //% advanced=true
         public updateLoop(loop: number): void {
             let packetBreak: number;
-            let tempString: string;
 
             if (reply_flag == true) {
                 reply_flag = false;
+                ble_reply = "";
                 ble_reply = bleReceive.substr(4);
                 control.raiseEvent((bleReceive.charCodeAt(2) - 32) + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE);
                 bleReceive = "";
@@ -240,7 +223,7 @@ namespace Andee {
                         bleMsg = String.fromCharCode(UISTART) + DATA_OUT + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +
+                            String.fromCharCode(this.widgetInputMode) +
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetUnit +
@@ -250,7 +233,7 @@ namespace Andee {
                         bleMsg = String.fromCharCode(UISTART) + DATA_OUT_CIRCLE + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +//inputType
+                            String.fromCharCode(this.widgetInputMode) +//inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetUnit +
@@ -260,7 +243,7 @@ namespace Andee {
                         bleMsg = String.fromCharCode(UISTART) + DATA_OUT_HEADER + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +//inputType
+                            String.fromCharCode(this.widgetInputMode) +//inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
@@ -269,7 +252,7 @@ namespace Andee {
                         bleMsg = String.fromCharCode(UISTART) + BUTTON_IN + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +//inputType
+                            "1" +//inputType button no ack
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
@@ -277,7 +260,7 @@ namespace Andee {
                         bleMsg = String.fromCharCode(UISTART) + CIRCLE_BUTTON + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +//inputType
+                            "1" +//inputType button no ack
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
@@ -285,21 +268,22 @@ namespace Andee {
                         bleMsg = String.fromCharCode(UISTART) + KEYBOARD_IN + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +//inputType
+                            String.fromCharCode(this.widgetInputMode) +//inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
                     case WidgetTypeInput.Slider:
+
                         bleMsg = String.fromCharCode(UISTART) + SLIDER_IN + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +//inputType
+                            String.fromCharCode(this.widgetInputMode) +//inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetData +
-                            String.fromCharCode(SEP) + this.widgetMaxValue +
-                            String.fromCharCode(SEP) + this.widgetMinValue +
+                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMaxValue) +
+                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMinValue) +
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetSliderSteps + 32) +
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetSliderForceUpdate) + String.fromCharCode(UIEND);
                         this.widgetSliderForceUpdate = 48;
@@ -308,31 +292,34 @@ namespace Andee {
                         bleMsg = String.fromCharCode(UISTART) + ANALOG_DIAL_OUT + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            this.widgetInputMode +//inputType
+                            String.fromCharCode(this.widgetInputMode) +//inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetUnit +
                             String.fromCharCode(SEP) + this.widgetData +
-                            String.fromCharCode(SEP) + this.widgetMaxValue +
-                            String.fromCharCode(SEP) + this.widgetMinValue + String.fromCharCode(UIEND);
+                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMaxValue) +
+                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMinValue) + String.fromCharCode(UIEND);
                         break;
 
                     default:
-                        serial.writeString("update error");
+                        //serial.writeString("update error");
                         break;
                 }
                 /////////////////////////////////Sending data to BLE////////////////////////////////////            
-                packetBreak = (bleMsg.length / 20) + 1;
+                packetBreak = Math.idiv(bleMsg.length, 20) + 1;
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
                     //serial.writeLine(tempString);
                 }
+                tempString = "";
+                bleMsg = "";
                 this.widgetUpdate = 1;
             }
             else {
                 this.widgetUpdate += 1;
             }
+            ble_reply = ""
         }
 
 
@@ -389,9 +376,9 @@ namespace Andee {
         widget.setColour(colour);
 
         widget.setHeight(20);
-        imd = position / 4;
+        imd = Math.idiv(position, 4);
         widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
-        imd = position - ((position / 4) * 4);
+        imd = position - (Math.idiv(position, 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
         switch (length) {
@@ -405,15 +392,14 @@ namespace Andee {
                 widget.setWidth(92);
                 break;
             default:
-                serial.writeString("length error");
+                //serial.writeString("length error");
                 break;
         }
+
 
         widget.setTitle(title);
         widget.setData(data);
         widget.setUnit(unit);
-
-        widget.setButtonInputMode(ButtonMode.MultiPress);
         widget.forceUpdate();
         return widget;
     }
@@ -427,8 +413,8 @@ namespace Andee {
      * @param title Title of Widget, eg: "Title"     
      * @param unit Widget Units Display,eg: "Units"
      * @param currentValue Widget Current Value for Display, eg: "0"
-     * @param maxValue Max Value for Display, eg: "100"
-     * @param minValue Min Value for Display, eg: "0"
+     * @param maxValue Max Value for Display, eg: 100
+     * @param minValue Min Value for Display, eg: 0
      * @param sliderSteps Number of steps for slider, eg: 100
      */
     //% weight=90
@@ -437,7 +423,7 @@ namespace Andee {
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
     export function createSliderWidget(id: WidgetId, widgetType: WidgetTypeInput, position: WidgetPosition, length: WidgetLength,
-        colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: string, minValue: string, sliderSteps: number): Widget {
+        colour: WidgetColour, title: string, unit: string, currentValue: string, maxValue: number, minValue: number, sliderSteps: number): Widget {
         let widget = new Widget();
         let imd: number;
 
@@ -446,9 +432,9 @@ namespace Andee {
         widget.setColour(colour);
 
         widget.setHeight(20);
-        imd = position / 4;
+        imd = Math.idiv(position, 4);
         widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
-        imd = position - ((position / 4) * 4);
+        imd = position - (Math.idiv(position, 4) * 4);
         widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
 
         switch (length) {
@@ -462,13 +448,12 @@ namespace Andee {
                 widget.setWidth(92);
                 break;
             default:
-                serial.writeString("length error");
+                //serial.writeString("length error");
                 break;
         }
         widget.setTitle(title);
         widget.setData(currentValue);
         widget.setUnit(unit);
-        widget.setSliderInputMode(SliderMode.On_Finger_Release);
         widget.setMinMax(minValue, maxValue);
         widget.setSliderSteps(sliderSteps);
         widget.forceUpdate();
@@ -482,8 +467,10 @@ namespace Andee {
     //% block="Clear All Widgets"
     //% advanced=true
     export function clear(): void {
+        bleMsg = ""
         bleMsg = String.fromCharCode(COMMANDSTART) + CLEAR + String.fromCharCode(COMMANDEND);
         bluetooth.uartWriteString(bleMsg);
+        bleMsg = "";
     }
 
     /**
@@ -532,8 +519,7 @@ namespace Andee {
     //% block="Convert %num| to String"
     //% advanced=true
     export function convertNumberToString(num: number): string {
-        let numString = num.toString();
-        return numString;
+        return (num.toString());
     }
 
     export function printToDEC(buffer: string): void {
@@ -543,7 +529,17 @@ namespace Andee {
             decimal = buffer.charCodeAt(i);
             replyDecimal = replyDecimal + " " + decimal + " ";
         }
-        serial.writeLine(replyDecimal);
+        //serial.writeLine(replyDecimal);
+    }
+
+    export function trimString(str: string): string {
+        if (str.length > 16) {
+            str + "..";
+            return str.substr(0, 18);
+        }
+        else {
+            return str;
+        }
     }
 
 }
@@ -700,8 +696,6 @@ const SEP = 0xFB;
 
 const EVENT_ID_OFFSET = 50;
 const ANDEE_EVENT_VALUE = 80;
-
-let sendVersion: string = String.fromCharCode(VERSIONSTART) + "M" + String.fromCharCode(SEP) + "1.0.0" + String.fromCharCode(VERSIONEND);
 
 const CLEAR = 'L';//
 const TIMEEPOCH = 'T';//

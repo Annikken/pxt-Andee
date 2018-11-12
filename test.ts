@@ -46,8 +46,8 @@ slider = Andee.createSliderWidget(
     "Move to change value",
     "Test",
     "50",
-    "100",
-    "0",
+    100,
+    0,
     100
 )
 
