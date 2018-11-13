@@ -300,6 +300,18 @@ namespace Andee {
                             String.fromCharCode(SEP) + convertNumberToString(this.widgetMaxValue) +
                             String.fromCharCode(SEP) + convertNumberToString(this.widgetMinValue) + String.fromCharCode(UIEND);
                         break;
+                    case WidgetTypeInput.Joystick:
+                        bleMsg = String.fromCharCode(UISTART) + JOYSTICK + String.fromCharCode(this.widgetId + 32) +
+                            String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
+                            String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
+                            String.fromCharCode(this.widgetInputMode) +//inputType
+                            String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
+                            String.fromCharCode(SEP) + this.widgetTitle +
+                            String.fromCharCode(SEP) + this.widgetUnit +
+                            String.fromCharCode(SEP) + this.widgetData +
+                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMaxValue) +
+                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMinValue) + String.fromCharCode(UIEND);
+                        break;
 
                     default:
                         //serial.writeString("update error");
@@ -319,7 +331,6 @@ namespace Andee {
             else {
                 this.widgetUpdate += 1;
             }
-            ble_reply = ""
         }
 
 
@@ -460,6 +471,58 @@ namespace Andee {
         return widget;
     }
     /**
+     * Create Joystick Widget
+     * @param id ID of Widget, eg: WidgetId.Widget_1
+     * @param position Position of Widget,eg: WidgetPosition.Row0_Column0
+     * @param length Length of Widget, eg: WidgetLength.Full
+     * @param colour Colour of Widget, eg: WidgetColour.Red
+     * @param title Title of Widget, eg: "Title"     
+     * @param xMax X Axis Max Value,eg: "100"
+     * @param xMin X Axis Min Value, eg: "-100"
+     * @param yMax Y Axis Max Value, eg: "100"
+     * @param yMin Y Axis Min Value, eg: "-100"
+     */
+    //% weight=90
+    //% blockId=create_joystick_widget icon="\u0041
+    //% block="Create Joystick Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|X Axis Max Value%xMax|X Axis Min Value%xMin|Y Axis Max Value%yMax|Y Axis Min Value%yMin"
+    //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
+    //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
+    export function createJoystickWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
+        colour: WidgetColour, title: string, xMax: string, xMin: string, yMax: number, yMin: number): Widget {
+        let widget = new Widget();
+        let imd: number;
+
+        widget.setId(id);
+        widget.setColour(colour);
+
+        widget.setHeight(20);
+        imd = Math.idiv(position, 4);
+        widget.setCoordY((imd * 20) + ((imd + 1) * 4));//calculating y coordinate
+        imd = position - (Math.idiv(position, 4) * 4);
+        widget.setCoordX((imd * 20) + ((imd + 1) * 4));//calculating x coordinate
+
+        switch (length) {
+            case WidgetLength.One_Quarter: //one_quarter
+                widget.setWidth(20);
+                break;
+            case WidgetLength.Half: //half
+                widget.setWidth(44);
+                break;
+            case WidgetLength.Full: //full
+                widget.setWidth(92);
+                break;
+            default:
+                //serial.writeString("length error");
+                break;
+        }
+        widget.setTitle(title);
+        widget.setData(xMin);
+        widget.setUnit(xMax);
+        widget.setMinMax(yMin, yMax);
+        widget.forceUpdate();
+        return widget;
+    }
+    /**
      * Block to clear all Widgets
      */
     //% weight=13
@@ -508,6 +571,18 @@ namespace Andee {
         else {
             return false
         }
+    }
+    /**
+     * Block to store values of joystick widget as a number
+     * @param xAxis Value of the X Axis will be stored here
+     * @param yAxis Value of the Y Axis will be stored here
+     */
+    //% weight=45
+    //% blockId=get_joystick_value
+    //% block="Get Joystick Value"
+    export function getJoystick(xAxis: number, yAxis: number): void {
+        xAxis = parseInt(ble_reply.substr(0, 4));
+        yAxis = parseInt(ble_reply.substr(4, 4));
     }
 
     /**
@@ -597,6 +672,8 @@ enum WidgetTypeInput {
     Slider = 81,
     //% block="Analog Dial"
     Analog_Dial = 82,
+    //% block="Joystick"
+    Joystick = 85,
 }
 
 enum WidgetPosition {
@@ -683,8 +760,6 @@ enum WidgetId {
     Widget_5
 }
 
-const VERSIONSTART = 0x7B;
-const VERSIONEND = 0x7D;
 
 const COMMANDSTART = 0x0A;
 const COMMANDEND = 0x0B;
@@ -700,18 +775,6 @@ const ANDEE_EVENT_VALUE = 80;
 const CLEAR = 'L';//
 const TIMEEPOCH = 'T';//
 const VERSION = 'V';//
-
-const CAMERA = 'M';//
-const TTS = 'P';//
-const VIBRATE = 'I';//
-
-const SMS = 'Z';//
-const NOTIFICATION = 'N';//
-
-const GYRO = 'O';//
-const LAC = 'F';//
-const GRAV = 'Y';//
-const GPS = 'S';//
 
 const DATA_OUT = "C";//
 const DATA_OUT_CIRCLE = 'G';//
