@@ -274,7 +274,6 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
                     case WidgetTypeInput.Slider:
-
                         bleMsg = String.fromCharCode(UISTART) + SLIDER_IN + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
@@ -322,7 +321,7 @@ namespace Andee {
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
-                    //serial.writeLine(tempString);
+                    serial.writeLine(tempString);
                 }
                 tempString = "";
                 bleMsg = "";
@@ -493,6 +492,7 @@ namespace Andee {
         let imd: number;
 
         widget.setId(id);
+        widget.setType(WidgetTypeInput.Joystick);
         widget.setColour(colour);
 
         widget.setHeight(20);
@@ -574,12 +574,12 @@ namespace Andee {
     }
     /**
      * Block to store values of joystick widget as a number
-     * @param xAxis Value of the X Axis will be stored here
-     * @param yAxis Value of the Y Axis will be stored here
+     * @param xAxis Value of the X Axis will be stored here, eg:50
+     * @param yAxis Value of the Y Axis will be stored here, eg:50
      */
     //% weight=45
     //% blockId=get_joystick_value
-    //% block="Get Joystick Value"
+    //% block="Get Joystick Value X Axis here %xAxis| Y Axis here %yAxis"
     export function getJoystick(xAxis: number, yAxis: number): void {
         xAxis = parseInt(ble_reply.substr(0, 4));
         yAxis = parseInt(ble_reply.substr(4, 4));

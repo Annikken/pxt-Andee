@@ -6,6 +6,8 @@ let keyboard: Andee.Widget = null
 let dataDisplay: Andee.Widget = null
 let value = 0
 
+
+
 Andee.begin()
 dataDisplay = Andee.createWidget(
     WidgetId.Widget_1,
@@ -37,18 +39,16 @@ keyboard = Andee.createWidget(
     "Data",
     "Units"
 )
-slider = Andee.createSliderWidget(
+slider = Andee.createJoystickWidget(
     WidgetId.Widget_4,
-    WidgetTypeInput.Slider,
-    WidgetPosition.Row2_Column0,
+    WidgetPosition.Row3_Column0,
     WidgetLength.Full,
     WidgetColour.Orange,
-    "Move to change value",
-    "Test",
+    "Joystick",
+    "100",
     "50",
     100,
-    0,
-    100
+    0
 )
 
 Andee.WidgetEvent(WidgetId.Widget_2, () => {
@@ -59,10 +59,12 @@ Andee.WidgetEvent(WidgetId.Widget_3, () => {
     text = Andee.getKeyboard()
     dataDisplay.setData(text)
 })
-// Andee.WidgetEvent(WidgetId.Widget_4, () => {
-//     value = Andee.getSlider()
-//     analog.setData(Andee.convertNumberToString(value))
-// })
+
+serial.redirect(
+    SerialPin.P1,
+    SerialPin.P2,
+    BaudRate.BaudRate115200
+)
 
 basic.forever(() => {
     button.updateLoop(80)
