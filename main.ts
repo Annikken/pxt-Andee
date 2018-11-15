@@ -321,7 +321,7 @@ namespace Andee {
                 for (let i = 0; i < packetBreak; i++) {
                     tempString = bleMsg.substr((i * 20), 20);
                     bluetooth.uartWriteString(tempString);
-                    serial.writeLine(tempString);
+                    //serial.writeLine(tempString);
                 }
                 tempString = "";
                 bleMsg = "";
@@ -574,15 +574,15 @@ namespace Andee {
     }
     /**
      * Block to store values of joystick widget as a number
-     * @param xAxis Value of the X Axis will be stored here, eg:50
-     * @param yAxis Value of the Y Axis will be stored here, eg:50
      */
     //% weight=45
     //% blockId=get_joystick_value
-    //% block="Get Joystick Value X Axis here %xAxis| Y Axis here %yAxis"
-    export function getJoystick(xAxis: number, yAxis: number): void {
-        xAxis = parseInt(ble_reply.substr(0, 4));
-        yAxis = parseInt(ble_reply.substr(4, 4));
+    //% block="Get Joystick Value"
+    export function getJoystick(): number[] {
+        let num = parseInt(ble_reply.substr(0, 4));
+        let num2 = parseInt(ble_reply.substr(4, 4));
+        let array: number[] = [num,num2];
+        return array
     }
 
     /**
