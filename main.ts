@@ -307,9 +307,7 @@ namespace Andee {
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetUnit +
-                            String.fromCharCode(SEP) + this.widgetData +
-                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMaxValue) +
-                            String.fromCharCode(SEP) + convertNumberToString(this.widgetMinValue) + String.fromCharCode(UIEND);
+                            String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
 
                     default:
@@ -477,17 +475,15 @@ namespace Andee {
      * @param colour Colour of Widget, eg: WidgetColour.Red
      * @param title Title of Widget, eg: "Title"     
      * @param xMax X Axis Max Value,eg: "100"
-     * @param xMin X Axis Min Value, eg: "-100"
      * @param yMax Y Axis Max Value, eg: "100"
-     * @param yMin Y Axis Min Value, eg: "-100"
      */
     //% weight=90
     //% blockId=create_joystick_widget icon="\u0041
-    //% block="Create Joystick Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|X Axis Max Value%xMax|X Axis Min Value%xMin|Y Axis Max Value%yMax|Y Axis Min Value%yMin"
+    //% block="Create Joystick Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|X Axis Max Value%xMax|Y Axis Max Value%yMax|"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
     export function createJoystickWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
-        colour: WidgetColour, title: string, xMax: string, xMin: string, yMax: number, yMin: number): Widget {
+        colour: WidgetColour, title: string, xMax: string, yMax: string): Widget {
         let widget = new Widget();
         let imd: number;
 
@@ -516,9 +512,8 @@ namespace Andee {
                 break;
         }
         widget.setTitle(title);
-        widget.setData(xMin);
+        widget.setData(yMax);
         widget.setUnit(xMax);
-        widget.setMinMax(yMin, yMax);
         widget.forceUpdate();
         return widget;
     }
@@ -581,7 +576,7 @@ namespace Andee {
     export function getJoystick(): number[] {
         let num = parseInt(ble_reply.substr(0, 4));
         let num2 = parseInt(ble_reply.substr(4, 4));
-        let array: number[] = [num,num2];
+        let array: number[] = [num, num2];
         return array
     }
 

@@ -46,9 +46,7 @@ slider = Andee.createJoystickWidget(
     WidgetColour.Orange,
     "Joystick",
     "100",
-    "50",
-    100,
-    0
+    "50"
 )
 
 Andee.WidgetEvent(WidgetId.Widget_2, () => {
