@@ -117,7 +117,7 @@ namespace Andee {
          * Each widget should have a title
          * @param title Set Widget Title, eg: "Title"
          */
-        //% weight=100
+        //% weight=98
         //% blockId=set_widget_title
         //% block="Set Title of %widget| to %title"
         //% advanced=true
@@ -129,7 +129,7 @@ namespace Andee {
          * Units are optional
          * @param units Set Widget Units, eg: "Units"
          */
-        //% weight=95
+        //% weight=96
         //% blockId=set_widget_units
         //% block="Set Units of %widget| to %units"
         //% advanced=true
@@ -140,7 +140,7 @@ namespace Andee {
          * This can display data
          * @param data Set Widget Data, eg: "Data"
          */
-        //% weight=98
+        //% weight=97
         //% blockId=set_widget_data
         //% block="Set Data of %widget| to %data"
         //% advanced=true
@@ -477,11 +477,12 @@ namespace Andee {
      * @param xMax X Axis Max Value,eg: "100"
      * @param yMax Y Axis Max Value, eg: "100"
      */
-    //% weight=90
+    //% weight=100
     //% blockId=create_joystick_widget icon="\u0041
     //% block="Create Joystick Widget: %id|Position%position|Widget Length%WidgetLength|Widget Colour%WidgetColour|Widget Title%title|X Axis Max Value%xMax|Y Axis Max Value%yMax|"
     //% position.fieldEditor="gridpicker" position.fieldOptions.columns=4
     //% WidgetColour.fieldEditor="gridpicker" WidgetColour.fieldOptions.columns=2
+    //% advanced=true
     export function createJoystickWidget(id: WidgetId, position: WidgetPosition, length: WidgetLength,
         colour: WidgetColour, title: string, xMax: string, yMax: string): Widget {
         let widget = new Widget();
@@ -570,9 +571,10 @@ namespace Andee {
     /**
      * Block to store values of joystick widget as a number
      */
-    //% weight=45
+    //% weight=99
     //% blockId=get_joystick_value
     //% block="Get Joystick Value"
+    //% advanced=true
     export function getJoystick(): number[] {
         let num = parseInt(ble_reply.substr(0, 4));
         let num2 = parseInt(ble_reply.substr(4, 4));
