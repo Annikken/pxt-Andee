@@ -758,7 +758,29 @@ enum WidgetId {
     //% block="Widget 4"
     Widget_4,
     //% block="Widget 5"
-    Widget_5
+    Widget_5,
+    //% block="Widget 6"
+    Widget_6,
+    //% block="Widget 7"
+    Widget_7,
+    //% block="Widget 8"
+    Widget_8,
+    //% block="Widget 9"
+    Widget_9,
+    //% block="Widget 10"
+    Widget_10,
+    //% block="Widget 11"
+    Widget_11,
+    //% block="Widget 12"
+    Widget_12,
+    //% block="Widget 13"
+    Widget_13,
+    //% block="Widget 14"
+    Widget_14,
+    //% block="Widget 15"
+    Widget_15,
+    //% block="Widget 16"
+    Widget_16,
 }
 
 
