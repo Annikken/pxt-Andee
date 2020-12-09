@@ -5,7 +5,8 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "bluetooth": "*"
+        "bluetooth": "*",
+        "microphone": "*"
     },
     "files": [
         "README.md",
@@ -15,15 +16,19 @@
         "test.ts"
     ],
     "public": true,
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj",
     "yotta": {
         "config": {
             "microbit-dal": {
                 "bluetooth": {
                     "open": 1,
-                    "whitelist": 0
+                    "whitelist": 0,
+                    "security_level": null
                 }
             }
         }
-    },
-    "installedVersion": "workspace:9341143e-eedc-4eeb-64bf-c367051ff22e"
+    }
 }
