@@ -9,6 +9,7 @@ namespace Andee {
     let reply_flag: boolean;
     let ble_reply: string;
     let tempString: string;
+    let packetBreak: number;
 
     export class Widget {
         private widgetId: number;
@@ -183,7 +184,7 @@ namespace Andee {
         //% blockId=Andee_widget_update
         //% block="Update Widget%widget"
         public update(): void {
-            this.updateLoop(100);
+            this.updateLoop(20);
         }
         /**
          * Block to send acknowledgement back to app
@@ -206,8 +207,7 @@ namespace Andee {
         //% blockId=Andee_widget_update_loop
         //% block="Update Widget%widget| every %loop|loops"
         //% advanced=true
-        public updateLoop(loop: number): void {
-            let packetBreak: number;
+        public updateLoop(loop: number): void {            
 
             if (reply_flag == true) {
                 reply_flag = false;
@@ -216,7 +216,7 @@ namespace Andee {
                 control.raiseEvent((bleReceive.charCodeAt(2) - 32) + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE);
                 bleReceive = "";
             }
-
+            bleMsg = "";
             if (this.widgetUpdate == loop || this.widgetUpdate == (0)) {
                 switch (this.widgetType) {
                     case WidgetType.Databox:
@@ -317,12 +317,17 @@ namespace Andee {
                 /////////////////////////////////Sending data to BLE////////////////////////////////////            
                 packetBreak = Math.idiv(bleMsg.length, 20) + 1;
                 for (let i = 0; i < packetBreak; i++) {
-                    tempString = bleMsg.substr((i * 20), 20);
-                    bluetooth.uartWriteString(tempString);
+                    //tempString = bleMsg.substr((i * 20), 20);
+                    //bluetooth.uartWriteString(tempString);
                     //serial.writeLine(tempString);
-                }
-                tempString = "";
-                bleMsg = "";
+                    if(i == (packetBreak - 1))
+                    {
+                        bluetooth.uartWriteString(bleMsg.substr((i * 20), (bleMsg.length % 20)));
+                    }
+                    else{
+                        bluetooth.uartWriteString(bleMsg.substr((i * 20), 20));
+                    }
+                }                
                 this.widgetUpdate = 1;
             }
             else {
