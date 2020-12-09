@@ -610,9 +610,9 @@ namespace Andee {
     }
 
     export function trimString(str: string): string {
-        if (str.length > 16) {
+        if (str.length > 14) {
             str + "..";
-            return str.substr(0, 18);
+            return str.substr(0, 12)+"..";
         }
         else {
             return str;
