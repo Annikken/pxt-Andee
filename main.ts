@@ -8,7 +8,6 @@ namespace Andee {
     let bleReceive: string;
     let reply_flag: boolean;
     let ble_reply: string;
-    let tempString: string;
     let packetBreak: number;
 
     export class Widget {
@@ -213,7 +212,7 @@ namespace Andee {
                 reply_flag = false;
                 ble_reply = "";
                 ble_reply = bleReceive.substr(4);
-                control.raiseEvent((bleReceive.charCodeAt(2) - 32) + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE);
+                control.raiseEvent((bleReceive.charCodeAt(2) - 32) + 30 /*EVENT_ID_OFFSET*/, 62 /*ANDEE_EVENT_VALUE*/);
                 bleReceive = "";
             }
             bleMsg = "";
@@ -359,7 +358,7 @@ namespace Andee {
     //% weight=70 blockGap=8 blockId="Andee_event" block="Widget Event|%id"
     //% blockExternalInputs=1
     export function WidgetEvent(id: WidgetId, action: Action): void {
-        control.onEvent(id + EVENT_ID_OFFSET, ANDEE_EVENT_VALUE, action);
+        control.onEvent(id + 30 /*EVENT_ID_OFFSET*/, 62 /*ANDEE_EVENT_VALUE*/, action);
     }
 
     /**
@@ -770,9 +769,6 @@ const UISTART = 0x04;
 const UIEND = 0x05;
 
 const SEP = 0xFB;
-
-const EVENT_ID_OFFSET = 50;
-const ANDEE_EVENT_VALUE = 80;
 
 const CLEAR = 'L';//
 const TIMEEPOCH = 'T';//
