@@ -170,7 +170,7 @@ namespace Andee {
         //% block="Remove Widget%widget"
         //% advanced=true
         public remove(): void {
-            bleMsg = String.fromCharCode(UISTART) + REMOVE + String.fromCharCode(SEP) +
+            bleMsg = String.fromCharCode(UISTART) + "E"/*REMOVE*/ + String.fromCharCode(SEP) +
                 String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
             bluetooth.uartWriteString(bleMsg);
             bleMsg = "";
@@ -193,7 +193,7 @@ namespace Andee {
         //% block="Send Ack%widget"
         public ack(): void {
             bleMsg = "";
-            bleMsg = String.fromCharCode(UISTART) + ACKN + String.fromCharCode(SEP) + String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
+            bleMsg = String.fromCharCode(UISTART) + "A"/*ACKN*/ + String.fromCharCode(SEP) + String.fromCharCode(this.widgetId + 32) + String.fromCharCode(UIEND);
             bluetooth.uartWriteString(bleMsg);
             bleMsg = "";
         }
@@ -219,7 +219,7 @@ namespace Andee {
             if (this.widgetUpdate == loop || this.widgetUpdate == (0)) {
                 switch (this.widgetType) {
                     case WidgetType.Databox:
-                        bleMsg = String.fromCharCode(UISTART) + DATA_OUT + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "C"/*DATA_OUT*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
                             String.fromCharCode(this.widgetInputMode) +
@@ -229,54 +229,54 @@ namespace Andee {
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
                     case WidgetType.Databox_Circle:
-                        bleMsg = String.fromCharCode(UISTART) + DATA_OUT_CIRCLE + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "G"/*DATA_OUT_CIRCLE*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            String.fromCharCode(this.widgetInputMode) +//inputType
+                            String.fromCharCode(this.widgetInputMode) + //inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetUnit +
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
                     case WidgetType.Databox_Header:
-                        bleMsg = String.fromCharCode(UISTART) + DATA_OUT_HEADER + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "H"/*DATA_OUT_HEADER*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            String.fromCharCode(this.widgetInputMode) +//inputType
+                            String.fromCharCode(this.widgetInputMode) + //inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
 
                     case WidgetType.Button:
-                        bleMsg = String.fromCharCode(UISTART) + BUTTON_IN + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "B"/*BUTTON_IN*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            "1" +//inputType button no ack
+                            "1" + //inputType button no ack
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
                     case WidgetType.Button_Circle:
-                        bleMsg = String.fromCharCode(UISTART) + CIRCLE_BUTTON + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "J"/*CIRCLE_BUTTON*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            "1" +//inputType button no ack
+                            "1" + //inputType button no ack
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle + String.fromCharCode(UIEND);
                         break;
                     case WidgetType.Keyboard_In:
-                        bleMsg = String.fromCharCode(UISTART) + KEYBOARD_IN + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "K"/*KEYBOARD_IN*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            String.fromCharCode(this.widgetInputMode) +//inputType
+                            String.fromCharCode(this.widgetInputMode) + //inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetData + String.fromCharCode(UIEND);
                         break;
                     case WidgetTypeInput.Slider:
-                        bleMsg = String.fromCharCode(UISTART) + SLIDER_IN + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "Q"/*SLIDER_IN*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            String.fromCharCode(this.widgetInputMode) +//inputType
+                            String.fromCharCode(this.widgetInputMode) + //inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetData +
@@ -287,10 +287,10 @@ namespace Andee {
                         this.widgetSliderForceUpdate = 48;
                         break;
                     case WidgetTypeInput.Analog_Dial:
-                        bleMsg = String.fromCharCode(UISTART) + ANALOG_DIAL_OUT + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "R"/*ANALOG_DIAL_OUT*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            String.fromCharCode(this.widgetInputMode) +//inputType
+                            String.fromCharCode(this.widgetInputMode) + //inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetUnit +
@@ -299,10 +299,10 @@ namespace Andee {
                             String.fromCharCode(SEP) + convertNumberToString(this.widgetMinValue) + String.fromCharCode(UIEND);
                         break;
                     case WidgetTypeInput.Joystick:
-                        bleMsg = String.fromCharCode(UISTART) + JOYSTICK + String.fromCharCode(this.widgetId + 32) +
+                        bleMsg = String.fromCharCode(UISTART) + "U"/*JOYSTICK*/ + String.fromCharCode(this.widgetId + 32) +
                             String.fromCharCode(this.widgetCoordX + 32) + String.fromCharCode(this.widgetCoordY + 32) +
                             String.fromCharCode(this.widgetWidth + 32) + String.fromCharCode(this.widgetHeight + 32) +
-                            String.fromCharCode(this.widgetInputMode) +//inputType
+                            String.fromCharCode(this.widgetInputMode) + //inputType
                             String.fromCharCode(SEP) + String.fromCharCode(this.widgetColour + 32) +
                             String.fromCharCode(SEP) + this.widgetTitle +
                             String.fromCharCode(SEP) + this.widgetUnit +
@@ -531,7 +531,7 @@ namespace Andee {
     //% advanced=true
     export function clear(): void {
         bleMsg = ""
-        bleMsg = String.fromCharCode(COMMANDSTART) + CLEAR + String.fromCharCode(COMMANDEND);
+        bleMsg = String.fromCharCode(COMMANDSTART) + "L"/*CLEAR*/ + String.fromCharCode(COMMANDEND);
         bluetooth.uartWriteString(bleMsg);
         bleMsg = "";
     }
@@ -769,29 +769,3 @@ const UISTART = 0x04;
 const UIEND = 0x05;
 
 const SEP = 0xFB;
-
-const CLEAR = 'L';//
-const TIMEEPOCH = 'T';//
-const VERSION = 'V';//
-
-const DATA_OUT = "C";//
-const DATA_OUT_CIRCLE = 'G';//
-const DATA_OUT_HEADER = 'H';//
-
-const BUTTON_IN = 'B';//
-const CIRCLE_BUTTON = 'J';//
-const ACKN = 'A';//
-
-const KEYBOARD_IN = 'K';//
-const DATE_IN = 'D';//
-const TIME_IN = 'X';//
-
-const SLIDER_IN = 'Q';//
-
-const ANALOG_DIAL_OUT = 'R';//
-
-const JOYSTICK = 'U';//
-
-const WATCH = 'W';//
-
-const REMOVE = 'E';//
