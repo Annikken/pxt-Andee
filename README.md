@@ -1,6 +1,7 @@
 # Andee
 
 This PXT package is to enable the use of the Annikken Andee app on the BBC micro:bit. Users can create UI widgets like sliders, buttons and more to control the micro:bit using their BLE enabled smartphone/tablets.
+This package has been updated to support the increased storage of the microbit V2. 
 
 ## Getting Started with Andee on micro:bit
 
