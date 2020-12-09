@@ -1,6 +1,6 @@
 {
     "name": "Andee",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "PXT package to enable the use of the Annikken Andee app on the BBC:MicroBit",
     "license": "MIT",
     "dependencies": {
