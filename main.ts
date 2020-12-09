@@ -1,15 +1,16 @@
-let bleMsg: string;
-let bleReceive: string;
-let reply_flag: boolean;
-let ble_reply: string;
-let tempString: string;
 /**
  * Custom blocks
  */
 //% weight=50 color=#16aeac icon="\u0041"
 namespace Andee {
-    export class Widget {
 
+    let bleMsg: string;
+    let bleReceive: string;
+    let reply_flag: boolean;
+    let ble_reply: string;
+    let tempString: string;
+
+    export class Widget {
         private widgetId: number;
         private widgetType: number;
         private widgetCoordX: number;
@@ -122,7 +123,6 @@ namespace Andee {
         //% block="Set Title of %widget| to %title"
         //% advanced=true
         public setTitle(title: string): void {
-
             this.widgetTitle = trimString(title);
         }
         /**
